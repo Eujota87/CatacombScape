@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Enemy
+  - Projectile
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - Player
+  - Water
+  - UI
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Cenario_Background
+    uniqueID: 3379961993
+    locked: 0
+  - name: Cenario_Floor
+    uniqueID: 1772781101
+    locked: 0
+  - name: Cenario_Walls
+    uniqueID: 929926651
+    locked: 0
+  - name: Itens
+    uniqueID: 236148245
+    locked: 0
+  - name: Player
+    uniqueID: 734548061
+    locked: 0
+  - name: Mobs
+    uniqueID: 2888377573
+    locked: 0
+  - name: Cenario_Foreground
+    uniqueID: 4164967807
+    locked: 0
+  - name: UI
+    uniqueID: 2348247447
+    locked: 0
