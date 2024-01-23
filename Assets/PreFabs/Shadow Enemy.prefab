@@ -78,7 +78,7 @@ GameObject:
   - component: {fileID: 7904234654159269361}
   - component: {fileID: 2836156683455388419}
   - component: {fileID: 8808511130202174951}
-  - component: {fileID: 6068210413431794174}
+  - component: {fileID: 5795600652735355963}
   m_Layer: 0
   m_Name: Shadow Enemy
   m_TagString: Enemy
@@ -160,9 +160,9 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 60
-  m_LinearDrag: 10
-  m_AngularDrag: 10
+  m_Mass: 10
+  m_LinearDrag: 1
+  m_AngularDrag: 1
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -175,7 +175,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &6068210413431794174
+--- !u!114 &5795600652735355963
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -187,7 +187,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3065b59e1c540664a9f076ada1a0857b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 1.6
+  movementSpeed: 1.9
 --- !u!1 &7505482052786060678
 GameObject:
   m_ObjectHideFlags: 0

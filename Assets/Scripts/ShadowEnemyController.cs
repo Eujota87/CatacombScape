@@ -33,7 +33,7 @@ public class ShadowEnemyController : MonoBehaviour
             Projectile projectile = other.gameObject.GetComponent<Projectile>();
             
             TakeDamage(projectile.ProjectileDamage);
-            Debug.Log(enemyLife);
+            Debug.Log("Enemy life: " + enemyLife);
         }
     }
 
