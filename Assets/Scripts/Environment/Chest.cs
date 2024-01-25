@@ -4,8 +4,9 @@ public class Chest : MonoBehaviour
 {
 
     [SerializeField] private string chestItem;
-    private bool chestOpen = false;
+    private bool isOpen = false;
 
+    public GameObject particle;
     private Animator chestAnimation;
     private Inventory inventory;
     private SpriteRenderer spriteRenderer;
@@ -26,13 +27,14 @@ public class Chest : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            if (!chestOpen) spriteRenderer.color = Color.gray;
+            if (!isOpen) spriteRenderer.color = Color.gray;
                     
-            if (Input.GetKeyDown(KeyCode.F) && !chestOpen)
+            if (Input.GetKeyDown(KeyCode.F) && !isOpen)
             {
                 GetItem(chestItem);
+                Instantiate(particle, transform.position, Quaternion.Euler(0, 0, transform.rotation.z));
                 chestAnimation.SetInteger("animState", 1);
-                chestOpen = true;
+                isOpen = true;
             }
         }
     }

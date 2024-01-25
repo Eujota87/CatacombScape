@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 5831539909026592166}
   - component: {fileID: 4602936865848262441}
   - component: {fileID: 1326654204249737494}
-  - component: {fileID: 8077302446715168986}
   - component: {fileID: 8549001544994242187}
+  - component: {fileID: 8077302446715168986}
   m_Layer: 0
   m_Name: Projectile
   m_TagString: Projectile
@@ -30,8 +30,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.19, y: 0.2884362, z: 0.87853044}
-  m_ConstrainProportionsScale: 1
+  m_LocalScale: {x: 0.29, y: 0.29, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -119,24 +119,9 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.99999994, y: 1.9999999}
+  m_Offset: {x: 0, y: 0.00795722}
+  m_Size: {x: 0.99999994, y: 1.2520251}
   m_Direction: 0
---- !u!114 &8077302446715168986
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2275558536763887354}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2250838a755b7fd498b002a7dcf693ed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  projectileSpeed: 850
-  projectileDamage: 50
-  particle: {fileID: 6182839634290658612, guid: 22bda5849dc2beb4da6d77fdaa673ac2, type: 3}
 --- !u!50 &8549001544994242187
 Rigidbody2D:
   serializedVersion: 4
@@ -164,3 +149,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &8077302446715168986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2275558536763887354}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2250838a755b7fd498b002a7dcf693ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectileSpeed: 850
+  projectileDamage: 50
+  particleHit: {fileID: 6182839634290658612, guid: 22bda5849dc2beb4da6d77fdaa673ac2, type: 3}
+  particleTrail: {fileID: 6731677524065570418, guid: dfc3bad426e5aa543b33f40c8f08565f, type: 3}

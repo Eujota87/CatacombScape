@@ -304,3 +304,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chestItem: key
+  particle: {fileID: 6731677524065570418, guid: 82f4190bb82bfc74296fe4fe6c04e59c, type: 3}

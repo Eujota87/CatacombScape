@@ -333,7 +333,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 4
   playerLife: 250
-  playerMana: 400
+  playerMana: 4000
   walkingParticle: {fileID: 6731677524065570418, guid: 8e311e58f6a5f1649bdd4b613367a0c7, type: 3}
 --- !u!4 &487082913
 Transform:
@@ -6579,7 +6579,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1602512696}
   - component: {fileID: 1602512697}
-  - component: {fileID: 1602512698}
   - component: {fileID: 1602512699}
   m_Layer: 3
   m_Name: Sprite
@@ -6655,18 +6654,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1602512698
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1602512695}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7fcc657f4ad7bb498d955853cbc91c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!95 &1602512699
 Animator:
   serializedVersion: 5
