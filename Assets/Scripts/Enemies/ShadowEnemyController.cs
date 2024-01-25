@@ -12,7 +12,7 @@ public class ShadowEnemyController : MonoBehaviour
     public GameObject hitParticle;
     public GameObject walkingParticle;
     private Vector2 chaseDirectionVector;
-    Vector2 facingDirection;
+    private Vector2 facingDirection; //stores chaseDirectionVector
     private bool isDead = false;
     private bool isHit = false;
 
@@ -39,7 +39,6 @@ public class ShadowEnemyController : MonoBehaviour
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         enemyAnimator = GetComponentInChildren<Animator>();
     }
-
     private void Update()
     {
         MovementCheck();
@@ -49,7 +48,6 @@ public class ShadowEnemyController : MonoBehaviour
             StartCoroutine(Die());
         }
     }
-
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Projectile"))
@@ -64,12 +62,10 @@ public class ShadowEnemyController : MonoBehaviour
             Instantiate(hitParticle, transform.position, transform.rotation);
         }
     }
-
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Player")) Instantiate(walkingParticle, transform.position, transform.rotation);
     }
-
     private void OnTriggerStay2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Player") && enemyState != States.dead)
@@ -77,14 +73,12 @@ public class ShadowEnemyController : MonoBehaviour
             Chase(other);
         } 
     }
-
     private void OnTriggerExit2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Player")) {
             chaseDirectionVector = Vector2.zero;
         }
     }
-
     private void MovementCheck()
     {
         if (chaseDirectionVector == Vector2.zero) enemyState = States.iddle;
@@ -100,41 +94,42 @@ public class ShadowEnemyController : MonoBehaviour
         }
 
         if (chaseDirectionVector != Vector2.zero) facingDirection = chaseDirectionVector;
+        
         if (facingDirection.x < 0)
         {
-            GetComponentInChildren<SpriteRenderer>().flipX = true;
+            spriteRenderer.flipX = true;
         }
         else
         {
-            GetComponentInChildren<SpriteRenderer>().flipX = false;
+            spriteRenderer.flipX = false;
         }
     }
-    
     private void Chase(Collider2D other)
     {
         chaseDirectionVector = (Vector2)other.gameObject.transform.position - (Vector2)this.transform.position;
         chaseDirectionVector = chaseDirectionVector.normalized;
         myRigidBody.position += chaseDirectionVector * (movementSpeed * Time.deltaTime);
     }
-
     private void TakeDamage(float amount)
     {
         isHit = true;
         enemyLife -= amount;
     }
-
     IEnumerator Die()
     {
         enemyState = States.dead;
+        isDead = true;
         enemyAnimator.SetInteger("animState", (int)enemyState);
         myRigidBody.simulated = false;
         yield return new WaitForSeconds(2);
         Destroy(gameObject);
     }
-
     public float EnemyDamage
     {
         get => enemyDamage;
     }
-    
+    public Vector2 EnemyFacingDirection
+    {
+        get => chaseDirectionVector;
+    }
 }

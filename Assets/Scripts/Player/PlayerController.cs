@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -13,6 +15,8 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D myRigidBody;
     private Inventory inventory;
     private Animator animator;
+    private ShadowEnemyController shadowEnemyController;
+    private SpriteRenderer spriteRenderer;
 
     enum States
     {
@@ -20,47 +24,50 @@ public class PlayerController : MonoBehaviour
         run,
         attack,
         runAttack,
-        stun,
+        temp,
         damage,
         dead
     }
-
     private States playerState;
-    
     private void Start()
     {
         myRigidBody = GetComponent<Rigidbody2D>();
         inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
         animator = GetComponentInChildren<Animator>();
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
-
     private void Update()
     {
-        InputAndMove();
-        ParticleSpawn();
-        
-        if (Input.GetKeyDown(KeyCode.E))
+        if (playerLife <= 0)
         {
-            ConsumeLifePotion(40F);
+            Die();
         }
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (!isDead && playerState != States.damage)
         {
-            ConsumeManaPotion(50F);
-        }
-        
-    }
+            InputAndMove();
+            RunParticleSpawn();
 
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                ConsumeLifePotion(40F);
+            }
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                ConsumeManaPotion(50F);
+            }
+        }
+    }
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Enemy"))
+        if (other.gameObject.CompareTag("Enemy")) //change this tag to shadow enemy later
         {
-            TakeDamage(other.gameObject.GetComponent<ShadowEnemyController>().EnemyDamage);
+            shadowEnemyController = other.gameObject.GetComponent<ShadowEnemyController>();
+            StartCoroutine(TakeDamage(shadowEnemyController.EnemyDamage, shadowEnemyController.EnemyFacingDirection, 200F, 0.3F));
         }
     }
-    
     private void InputAndMove()
     {
-        Vector2 inputVector = new Vector2(0, 0);
+        Vector2 inputVector = Vector2.zero;
         
         if (Input.GetKey(KeyCode.W))
         {
@@ -73,17 +80,21 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.D))
         {
             inputVector.x += 1;
-            GetComponentInChildren<SpriteRenderer>().flipX = false;
+            spriteRenderer.flipX = false;
         }
         if (Input.GetKey(KeyCode.A))
         {
             inputVector.x += -1;
-            GetComponentInChildren<SpriteRenderer>().flipX = true;
+            spriteRenderer.flipX = true;
         }
         
         inputVector = inputVector.normalized;
         myRigidBody.position += inputVector * (Time.deltaTime * movementSpeed);
-        
+
+        MoveStateUpdate(inputVector);
+    }
+    private void MoveStateUpdate(Vector2 inputVector)
+    {
         if (inputVector == Vector2.zero) playerState = States.iddle;
         
         if (inputVector != Vector2.zero) playerState = States.run;
@@ -92,12 +103,27 @@ public class PlayerController : MonoBehaviour
         
         if ((inputVector == Vector2.zero) && Input.GetKeyDown(KeyCode.Mouse0)) playerState = States.attack;
         
-        if (isDead) playerState = States.dead;
-        
         animator.SetInteger("animState", (int)playerState);
     }
-
-    private void ParticleSpawn()
+    IEnumerator TakeDamage(float damageAmount, Vector2 stunDirection, float stunAmount, float stunTime)
+    {
+        playerState = States.damage;
+        playerLife -= damageAmount;
+        myRigidBody.AddForce(stunDirection * stunAmount);
+        animator.SetInteger("animState", (int)States.damage);
+        yield return new WaitForSeconds(stunTime);
+        
+        playerState = States.iddle;
+        myRigidBody.velocity = Vector2.zero;
+    }
+    private void Die()
+    {
+        playerState = States.dead;
+        isDead = true;
+        myRigidBody.simulated = false;
+        animator.SetInteger("animState", (int)playerState);
+    }
+    private void RunParticleSpawn()
     {
         if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.W) ||
             Input.GetKeyDown(KeyCode.D))
@@ -105,7 +131,6 @@ public class PlayerController : MonoBehaviour
             Instantiate(walkingParticle, transform.position, transform.rotation);
         }
     }
-    
     private void ConsumeLifePotion(float amount)
     {
         if (inventory.LifePotionCount > 0)
@@ -122,18 +147,11 @@ public class PlayerController : MonoBehaviour
             playerMana += amount;
         }
     }
-
-    public void TakeDamage(float amount)
-    {
-        playerLife -= amount;
-    }
-    
     public float PlayerLife
     {
         get { return playerLife; }
         set { playerLife = value; }
     }
-
     public float PlayerMana
     {
         get { return playerMana; }
