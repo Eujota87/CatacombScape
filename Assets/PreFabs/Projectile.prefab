@@ -136,6 +136,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectileSpeed: 850
   projectileDamage: 50
+  particle: {fileID: 6182839634290658612, guid: 22bda5849dc2beb4da6d77fdaa673ac2, type: 3}
 --- !u!50 &8549001544994242187
 Rigidbody2D:
   serializedVersion: 4
