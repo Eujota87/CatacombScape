@@ -1,5 +1,4 @@
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -22,6 +21,7 @@ public class PlayerController : MonoBehaviour
         attack,
         runAttack,
         stun,
+        damage,
         dead
     }
 

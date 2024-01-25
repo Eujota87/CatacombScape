@@ -44,7 +44,7 @@ public class WandController : MonoBehaviour
         
         float aimAngle = Vector2.SignedAngle(Vector2.right, aimVector);
         Instantiate(projectile1, transform.position, Quaternion.Euler(0, 0, aimAngle - 90), transform);
-        Debug.Log("Vetor: " + aimVector);
-        Debug.Log("Angulo: " + aimAngle);
+        //Debug.Log("Vetor: " + aimVector);
+        //Debug.Log("Angulo: " + aimAngle);
     }
 }

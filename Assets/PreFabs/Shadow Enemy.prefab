@@ -188,6 +188,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 1.9
+  enemyLife: 200
+  enemyDamage: 50
+  hitParticle: {fileID: 6731677524065570418, guid: 58daa954f6a5ebb4fab2919a2dbe83bc, type: 3}
+  walkingParticle: {fileID: 6731677524065570418, guid: 8e311e58f6a5f1649bdd4b613367a0c7, type: 3}
 --- !u!1 &7505482052786060678
 GameObject:
   m_ObjectHideFlags: 0
@@ -198,8 +202,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2944921975878027347}
   - component: {fileID: 708359302353442937}
+  - component: {fileID: 7333262607218274604}
   m_Layer: 0
-  m_Name: Shadow Enemy Sprite
+  m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -272,3 +277,24 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &7333262607218274604
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7505482052786060678}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b48936bbe69f55c4c89d15a59a88b263, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
